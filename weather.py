@@ -85,17 +85,24 @@ while True:
       observation = mgr.weather_at_place('Lyon,FR')
       w = observation.weather
 
-      w.detailed_status         # 'clouds'
-      w.wind()                  # {'speed': 4.6, 'deg': 330}
-      w.humidity                # 87
-      w.temperature('celsius')  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
-      w.rain                    # {}
-      w.heat_index              # None
-      w.clouds                  # 75
-
-      client2.publish(METRICS_WEATHER + "/wind", str(w.wind()))
+      #w.detailed_status         # 'clouds'
+      #w.wind()                  # {'speed': 4.6, 'deg': 330}
+      #w.humidity                # 87
+      #w.temperature('celsius')  # {'temp_max': 10.5, 'temp': 9.7, 'temp_min': 9.0}
+      #w.rain                    # {}
+      #w.heat_index              # None
+      #w.clouds                  # 75
+    
+      wind = w.wind()
+      temperature = w.temperature("celsius")
+      client2.publish(METRICS_WEATHER + "/wind/speed", str(wind["speed"]))
+      client2.publish(METRICS_WEATHER + "/wind/deg", str(wind["deg"]))
+      client2.publish(METRICS_WEATHER + "/wind/gust", str(wind["gust"]))
       client2.publish(METRICS_WEATHER + "/humidity", str(w.humidity))
-      client2.publish(METRICS_WEATHER + "/temperature", str(w.temperature('celsius')))
+      client2.publish(METRICS_WEATHER + "/temperature", str(temperature['temp']))
+      client2.publish(METRICS_WEATHER + "/temperature/min", str(temperature['temp_min']))
+      client2.publish(METRICS_WEATHER + "/temperature/max", str(temperature['temp_max']))
+      client2.publish(METRICS_WEATHER + "/temperature/feeds_like", str(temperature['feels_like']))
 
 
 
