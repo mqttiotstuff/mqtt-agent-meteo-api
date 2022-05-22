@@ -95,6 +95,7 @@ while True:
     
       wind = w.wind()
       temperature = w.temperature("celsius")
+      client2.publish(METRICS_WEATHER + "/observation_time", "" + time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime()), qos=1,retain=True)
       client2.publish(METRICS_WEATHER + "/wind/speed", str(wind["speed"]), qos=1,retain=True)
       client2.publish(METRICS_WEATHER + "/wind/deg", str(wind["deg"]), qos=1,retain=True)
       client2.publish(METRICS_WEATHER + "/wind/gust", str(wind["gust"]), qos=1,retain=True)
