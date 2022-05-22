@@ -95,14 +95,14 @@ while True:
     
       wind = w.wind()
       temperature = w.temperature("celsius")
-      client2.publish(METRICS_WEATHER + "/wind/speed", str(wind["speed"]))
-      client2.publish(METRICS_WEATHER + "/wind/deg", str(wind["deg"]))
-      client2.publish(METRICS_WEATHER + "/wind/gust", str(wind["gust"]))
-      client2.publish(METRICS_WEATHER + "/humidity", str(w.humidity))
-      client2.publish(METRICS_WEATHER + "/temperature", str(temperature['temp']))
-      client2.publish(METRICS_WEATHER + "/temperature/min", str(temperature['temp_min']))
-      client2.publish(METRICS_WEATHER + "/temperature/max", str(temperature['temp_max']))
-      client2.publish(METRICS_WEATHER + "/temperature/feeds_like", str(temperature['feels_like']))
+      client2.publish(METRICS_WEATHER + "/wind/speed", str(wind["speed"]), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/wind/deg", str(wind["deg"]), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/wind/gust", str(wind["gust"]), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/humidity", str(w.humidity), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/temperature", str(temperature['temp']), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/temperature/min", str(temperature['temp_min']), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/temperature/max", str(temperature['temp_max']), qos=1,retain=True)
+      client2.publish(METRICS_WEATHER + "/temperature/feeds_like", str(temperature['feels_like']), qos=1,retain=True)
 
 
 
